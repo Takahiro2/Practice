@@ -31,8 +31,9 @@ public class challenge11c extends HttpServlet {
      void kake(int num1,int num2,boolean f,PrintWriter pw){
         if(f == true){
             pw.print(num1 * num2 * (num1 * num2));
-        }else
+        }else{
             pw.print(num1 * num2);
+        }
     }void kake(PrintWriter pw){
           kake(6,5,false,pw);
     }
