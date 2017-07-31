@@ -1,13 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+import java.io.PrintWriter;
 
-/**
- *
- * @author guest1Day
- */
-public class Human {
+public class Human{
+    public String name = "";
+    public int height = 0;
     
+    public void setHuman(String name,int height){
+        name = "Watanabe";
+        height = 173;
+    }public void print(PrintWriter pw){
+        pw.print(name);
+        pw.print(height);
+    }
 }
