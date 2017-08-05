@@ -1,15 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package org.java;
+package org.mypackage;
 
 import java.util.*;
 
 public abstract class Human {
+
     public abstract int open();
+
     public abstract void setCard(ArrayList<Integer> setCard);
+
     public abstract boolean checkSum();
-    ArrayList<Integer>myCards = new ArrayList<>();
+    ArrayList<Integer> myCards = new ArrayList<>();
 }

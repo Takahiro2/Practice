@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package org.java;
+package org.mypackage;
 
 import java.util.*;
 
@@ -14,13 +9,15 @@ public class Dealer extends Human {
     Dealer() {
         for (int mark = 1; mark <= 4; mark++) {
             for (int num = 1; num <= 13; num++) {
-                if(num <=10){
-                cards.add(num);
-            }else
-                cards.add(10);
+                if (num <= 10) {
+                    cards.add(num);
+                } else {
+                    cards.add(10);
+                }
             }
         }
     }
+
     //乱数randを作成
     Random rand = new Random();
 
@@ -69,15 +66,3 @@ public class Dealer extends Human {
         }
     }
 }
-
-
-/*
-cardsというArrayListの変数を用意し、初期処理でこのcardsに全てのトランプを持たせてください。
-dealという公開メソッドを用意し、cardsからランダムで2枚のカードをArrayListにして返却してください。
-hitという公開メソッドを用意し、cardsからランダムで1枚のカードをArrayListにして返却してください。
-
-DealerとUser両方に必要な処理を実装し、完成させます。
-setCardは、ArrayListで受けたカード情報をmyCardsに追加するように実装してください。
-checkSumは、myCardsを確認し、まだカードが必要ならtrue、必要無ければfalseを返却するように実装してください。
-openは、myCardsのカードの合計値を返却するように実装してください。
-*/
