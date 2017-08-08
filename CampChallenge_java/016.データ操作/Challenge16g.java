@@ -21,9 +21,9 @@ public class Challenge16g extends HttpServlet {
             SimpleDateFormat sdf = new SimpleDateFormat();
             HttpSession login = request.getSession();
 
-            login.setAttribute("lastLogin", sdf.format(now));
-
             out.println(login.getAttribute("lastLogin"));
+
+            login.setAttribute("lastLogin", sdf.format(now));
 
         }
     }
