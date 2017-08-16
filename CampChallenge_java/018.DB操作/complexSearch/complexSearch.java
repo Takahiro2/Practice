@@ -52,7 +52,7 @@ public class complexSearch extends HttpServlet {
                 String name = request.getParameter("name");
                 int age = Integer.parseInt(request.getParameter("age"));
 
-                // 情報を基にmysqlにて情報を追加する
+                // 情報を基にmysqlにて検索する
                 PreparedStatement db_insert = null;
                 db_insert = db_con.prepareStatement("select * from profiles where name = ? and age = ?");
                 db_insert.setString(1, name);
