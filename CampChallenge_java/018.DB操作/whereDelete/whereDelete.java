@@ -32,7 +32,7 @@ public class whereDelete extends HttpServlet {
                 // 検索フォームから情報を取得
                 int deleteID = Integer.parseInt(request.getParameter("deleteID"));
                 
-                // 情報を基にmysqlにて情報を追加する
+                // 情報を基にmysqlにて削除を実行
                 PreparedStatement db_delete = null;
                 db_delete = db_con.prepareStatement("delete from profiles where profilesID = ?");
                 db_delete.setInt(1,deleteID); 
