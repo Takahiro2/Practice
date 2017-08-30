@@ -2,7 +2,9 @@ package jums;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -41,15 +43,30 @@ public class InsertResult extends HttpServlet {
                 throw new Exception("不正なアクセスです");
             }
 
+            
             //ユーザー情報に対応したJavaBeansオブジェクトに格納していく
             UserDataDTO userdata = new UserDataDTO();
             userdata.setName(udb.getName());
-            Calendar birthday = Calendar.getInstance();
-            userdata.setBirthday(birthday.getTime());
             userdata.setType(udb.getType());
             userdata.setTell(udb.getTell());
             userdata.setComment(udb.getComment());
+            
+            // 生年月日を収納
+            String year = ((String)udb.getYear());
+            String month = ((String)udb.getMonth());
+            if(month.length() == 1) {
+                month = "0" + month;
+            }
+            String day = ((String)udb.getDay());
+            if(day.length() == 1) {
+                day = "0" + day;
+            }
+            String strBirthday = year + month + day;
+            
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+            Date birthday = sdf.parse(strBirthday);
 
+            userdata.setBirthday(birthday);
             //DBへデータの挿入
             UserDataDAO.getInstance().insert(userdata);
 
