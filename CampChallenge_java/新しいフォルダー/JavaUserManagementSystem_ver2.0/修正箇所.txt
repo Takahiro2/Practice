@@ -1,0 +1,11 @@
+1.直リンク防止の処理を施した。
+2.mysqlでの検索ができていなかったので修正した。
+3.ResultDetail.javaにて、IDが２のユーザーを表示する様になっていたので、
+適当なユーザーを表示する様修正
+4.Update.javaが全くの手つかずだったので、処理を施しました。
+5.UpdateResult.javaについても同様です。
+6.updateメソッドがなかったので作成しました。
+7.update.jspにて生年月が表示されない問題の修正。
+8.updateresult.jspにて、入力結果画面の不備を修正。
+9.delete.javaが手つかずだったので、処理を施しました。
+10.resultdetail.jspに戻る処理を追加。
