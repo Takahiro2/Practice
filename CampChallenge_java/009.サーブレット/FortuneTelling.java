@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.mypackage.sample;
 
 import java.io.IOException;
@@ -12,42 +7,33 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Random;
 
-/**
- *
- * @author guest1Day
- */
+import java.util.Date;
+import java.util.Random;
+import javax.servlet.RequestDispatcher;
+import org.mypackage.sample.ResultData;
+
 @WebServlet(name = "FortuneTelling", urlPatterns = {"/FortuneTelling"})
 public class FortuneTelling extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        // 文字コードをUTF-8に変更
         response.setContentType("text/html;charset=UTF-8");
+
+        // PrintWriterは先ほど設定したUTF-8を使ってエンコーティングしてくれる
         try (PrintWriter out = response.getWriter()) {
+
+            // 配列lucklistにおみくじの中身を入れる 
             String lucklist[] = {"大吉", "中吉", "吉", "半吉", "末小吉", "凶", "小凶", "半凶", "末凶", "凶", "大凶"};
-            Random rand= new Random();
+            // 乱数randを作成
+            Random rand = new Random();
+            // indexにおみくじの種類数の内から乱数を取得
             Integer index = rand.nextInt(lucklist.length);
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet FortuneTelling</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet FortuneTelling at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-            out.println("今日のあなたの運勢は。。。" + lucklist[index] + "!");
+            
+            // 表示
+            out.println("あなたの運勢は・・・" + lucklist[index] + "です！");
         }
     }
 
