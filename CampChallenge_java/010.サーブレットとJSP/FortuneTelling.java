@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.mypackage.sample;
 
 import java.io.IOException;
@@ -16,48 +11,44 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.Random;
 import javax.servlet.RequestDispatcher;
-import org.mypackage.sample.ResultData;
 
-/**
- *
- * @author guest1Day
- */
 @WebServlet(name = "FortuneTelling", urlPatterns = {"/FortuneTelling"})
 public class FortuneTelling extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        // 文字コードをUTF-8に変更
         response.setContentType("text/html;charset=UTF-8");
+
+        // PrintWriterは先ほど設定したUTF-8を使ってエンコーティングしてくれる
         try (PrintWriter out = response.getWriter()) {
-            final String result = ("/WEB-INF/jsp/FortuneTellingResult.jsp");
+
+            // 配列lucklistにおみくじの中身を代入
             String lucklist[] = {"大吉", "中吉", "吉", "半吉", "末小吉", "凶", "小凶", "半凶", "末凶", "凶", "大凶"};
+            // 乱数randを生成
             Random rand = new Random();
+            // indexにおみくじの種類数内の乱数を取得
             Integer index = rand.nextInt(lucklist.length);
-            // リクエストへ結果を設定
-             ResultData data = new ResultData();
-             data.setD(new Date());
-             data.setLuck(lucklist[index]);
-             request.setAttribute("DATA",data);
-             
-             RequestDispatcher rd = request.getRequestDispatcher(result);
-             rd.forward(request,response);
+
+            // 結果を取得する為のdataを宣言
+            ResultData data = new ResultData();
+
+            data.setD(new Date());
+            // 乱数index番目のおみくじを引く
+            data.setLuck(lucklist[index]);
+            // リクエストスコープ"DATA"に、占い結果dataを格納
+            request.setAttribute("DATA", data);
+
+            // ページ遷移用のresult
+            final String result = ("/WEB-INF/jsp/FortuneTellingResult.jsp");
+            // リクエストディスパッチャーでFortuneTellingResult.jspに
+            RequestDispatcher rd = request.getRequestDispatcher(result);
+            rd.forward(request, response);
         }
-        
-        
-        
-        }
-    
-    
-    
+
+    }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
