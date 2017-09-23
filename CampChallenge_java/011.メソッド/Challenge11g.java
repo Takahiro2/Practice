@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package org.mypackage.sample;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,41 +10,46 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "Challenge11g", urlPatterns = {"/Challenge11g"})
 public class Challenge11g extends HttpServlet {
 
-String[] prof1 = {"相田","1月1日","愛知県"};
-String[] prof2 = {"飯田","2月2日",null};
-String[] prof3 = {"宇井","3月3日","ウクライナ"};
-String[][] allprof = {prof1,prof2,prof3};
-String[] profile(int ID){
-    return allprof[ID];
-}
-    
+    // 3人分のプロフィール配列を表示 入ってない情報はnullを入れる
+    String[] prof1 = {"相田", "1月1日", "愛知県"};
+    String[] prof2 = {"飯田", "2月2日", null};
+    String[] prof3 = {"宇井", "3月3日", "ウクライナ"};
+    // 配列allprofに3人分のプロフィール配列を収納
+    String[][] allprof = {prof1, prof2, prof3};
+
+    // 引数で渡されたIDの情報を戻り値として返すメソッド
+    String[] profile(int ID) {
+        return allprof[ID];
+    }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // 文字コードをUTF-8に
         response.setContentType("text/html;charset=UTF-8");
+
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Challenge11g</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Challenge11g at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-            
-            for(int ID = 0;ID < 3;ID++){
+
+            // 3回ループ
+            for (int ID = 0; ID < 3; ID++) {
+                // allprofileに格納
                 String[] allprofile = profile(ID);
-                
-                for(int i = 0;i < 3;i++){
-                    if(allprofile[i] == null){
+
+                // 情報にnullが入ってる場合は飛ばす
+                for (int i = 0; i < 3; i++) {
+                    if (allprofile[i] == null) {
                         continue;
                     }
+
+                    // nullじゃなければ普通に表示
                     out.println(allprofile[i]);
+
                 }
-                 out.print("<br>");    
+
+                // 一人分の表示毎に改行
+                out.print("<br>");
+
             }
-            
+
         }
     }
 
