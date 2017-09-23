@@ -1,59 +1,38 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package org.mypackage.sample;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.System.out;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author guest1Day
- */
 public class challenge11c extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-     void kake(int num1,int num2,boolean f,PrintWriter pw){
-        if(f == true){
+    // 渡された数値で掛け算をするメソッド
+    void kake(int num1, int num2, boolean f, PrintWriter pw) {
+        
+        // 3番目の引数がtrueの時は更に２乗
+        if (f == true) {
             pw.print(num1 * num2 * (num1 * num2));
-        }else{
+        // trueでない時    
+        } else {
             pw.print(num1 * num2);
         }
-    }void kake(PrintWriter pw){
-          kake(6,5,false,pw);
     }
-            
-            
-            
+
+    // 適当な数字 6 5 更に boolean false を入れた
+    void kake(PrintWriter pw) {
+        kake(6, 5, false, pw);
+    }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // 文字コードをUTF-8に
         response.setContentType("text/html;charset=UTF-8");
+        
+        // 画面表示
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet challenge11c</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet challenge11c at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            // 結果の表示
             kake(out);
         }
     }
