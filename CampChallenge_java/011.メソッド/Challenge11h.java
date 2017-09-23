@@ -1,4 +1,3 @@
-
 package org.mypackage.sample;
 
 import java.io.IOException;
@@ -12,40 +11,48 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "Challenge11h", urlPatterns = {"/Challenge11h"})
 public class Challenge11h extends HttpServlet {
 
-String[] prof1 = {"相田","1月1日","愛知県"};
-String[] prof2 = {"飯田","2月2日",null};
-String[] prof3 = {"宇井","3月3日","ウクライナ"};
-String[][] allprof = {prof1,prof2,prof3};
-String[] profile(int ID){
-    return allprof[ID];
-}
-    
+    // 3人分のプロフィール情報を作成 入っていない情報はnullを入れる
+    String[] prof1 = {"相田", "1月1日", "愛知県"};
+    String[] prof2 = {"飯田", "2月2日", null};
+    String[] prof3 = {"宇井", "3月3日", "ウクライナ"};
+    // 配列allprofに3人分のプロフィールを収納
+    String[][] allprof = {prof1, prof2, prof3};
+
+    // IDを引数として渡すと該当するID情報を返してくれるprofileメソッド
+    String[] profile(int ID) {
+        return allprof[ID];
+    }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // 文字コードをUTF-8に
         response.setContentType("text/html;charset=UTF-8");
+
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Challenge11h</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Challenge11h at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-            
+
+            // 変数limitを作成
             Integer limit = 2;
-            for(int ID = 0;ID < limit;ID++){
-            String[] allprofile = profile(ID);
-                
-            for(int i = 0;i < 3;i++){
-                if(allprofile[i] == null){
-                    continue;
+
+            // limitの回数2回ループ
+            for (int ID = 0; ID < limit; ID++) {
+
+                // 配列allprofileに引数で渡されたID情報を収納
+                String[] allprofile = profile(ID);
+
+                // 3回ループ
+                for (int i = 0; i < 3; i++) {
+
+                    // nullの情報は飛ばす
+                    if (allprofile[i] == null) {
+                        continue;
+                    }
+
+                    // 入っている情報を表示していく
+                    out.println(allprofile[i]);
+                    // 一人出す毎に改行
+                    out.print("<br>");
+
                 }
-                out.println(allprofile[i]);
-                }
-                out.print("<br>");  
             }
         }
     }
