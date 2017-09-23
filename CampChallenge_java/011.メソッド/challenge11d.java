@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package org.mypackage.sample;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,52 +7,37 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author guest1Day
- */
 @WebServlet(name = "challenge11d", urlPatterns = {"/challenge11d"})
 public class challenge11d extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    void kake(int num1,int num2,boolean f,PrintWriter pw){
-         if(f == true){
-             pw.print(num1 * num2 * (num1 * num2));
-         }else
-             pw.print(num1 * num2);
-    }boolean ret(boolean f){
+    // 渡した値で掛け算を行い、trueがあれば更に2乗し、計算が完了すればtrueを返す
+    boolean kake(int num1, int num2, boolean f, PrintWriter pw) {
+
+        if (f == true) {
+            pw.print(num1 * num2 * (num1 * num2));
+        } else {
+            pw.print(num1 * num2);
+        }
+
         return true;
+
     }
-            void kake(PrintWriter pw){
-           kake(6,5,false,pw);
-    }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        // 文字コードをUTF-8にする
         response.setContentType("text/html;charset=UTF-8");
+
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet challenge11d</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet challenge11d at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-            kake(out);
-            if(ret(true)){
-                out.print("この処理は正しく実行できました");
-            }else
+
+            // 適当な数字 6 5 boolean true を与え正しく計算が終了すればそのまま計算結果を画面に表示
+            if (kake(6, 5, true, out) == true) {
+                out.println(kake(6,5,true,out));
+                out.println("この処理は正しく実行できました");
+            } else {
                 out.print("正しく実行できませんでした");
+            }
         }
     }
 
