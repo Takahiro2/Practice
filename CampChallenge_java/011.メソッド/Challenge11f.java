@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package newpackage;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,45 +8,45 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 @WebServlet(name = "Challenge11f", urlPatterns = {"/Challenge11f"})
 public class Challenge11f extends HttpServlet {
 
-String[] profile(int ID){
-    switch(ID){
-        case 001:{
-            String prof[] = {"相田","1月1日","愛知県"};
-            return prof;
+    // IDを引数として、指定されたIDのプロフィールを戻り値として返すメソッド
+    String[] profile(int ID) {
+        
+        switch (ID) {
+            case 001: {
+                String prof[] = {"相田", "1月1日", "愛知県"};
+                return prof;
+            }
+            case 002: {
+                String prof[] = {"飯田", "2月2日", "石川県"};
+                return prof;
+            }
+            case 003: {
+                String prof[] = {"宇井", "3月3日", "ウクライナ"};
+                return prof;
+            }
         }
-        case 002:{
-            String prof[] = {"飯田","2月2日","石川県"};
-            return prof;
-        }
-        case 003:{
-            String prof[] = {"宇井","3月3日","ウクライナ"};
-            return prof;
-        }
+        
+        // ID情報が存在しない場合はnullを返す
+        return null;
+        
     }
-    return null;
-}
- 
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        // 文字コードをUTF-8に
         response.setContentType("text/html;charset=UTF-8");
+        
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Challenge11f</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Challenge11f at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-            
+
+            // 引数として002を渡す
             String[] IDdata = profile(002);
+            // 情報を表示(今回はID 002の情報)
             out.println(Arrays.toString(IDdata));
+            
         }
     }
 
