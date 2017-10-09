@@ -1,5 +1,0 @@
-<%
-    
-out.print("Hello world.");
-
-%>
